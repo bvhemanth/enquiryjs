@@ -1,0 +1,15 @@
+.main{
+    display: inline-block;
+    div{
+        max-width: 33%;
+        margin: auto;
+        max-height: 30rem;
+        display: inline-block;
+    }
+}
+.pagination{
+    text-align: center;
+    &__page{
+        margin:0px 5px;
+    }
+}

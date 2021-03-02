@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "inscmp": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "inscmp"
+    }
+  },
+  "defaultProject": "inscmp",
+  "cli": {
+    "analytics": "539ed15c-201a-4c6c-9bac-0f3c27aaa5a8"
+  }
 }

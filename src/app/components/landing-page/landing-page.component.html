@@ -1,0 +1,35 @@
+
+<div class="container">
+    <div class="container__search">
+        <input type="search" name="" (keyup)="search()" id="search" class="mb-3 rounded" [(ngModel)]="searchText" placeholder="Search">
+    </div>
+    <div class="container__sort">
+        <button type="button" (click)="search()">Sort by Title</button>
+        Sort By date <input type="date">
+    </div>
+    <div>
+        <app-pagination [currentPage]="currentPage" [startIndex]="startIndex" 
+        [endIndex]="endIndex" [pages]="pages" [items]="designComaniesData" [count]="recordsCount"> </app-pagination>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Edited on
+                </th>
+            </tr>
+        </thead>
+        <tr *ngFor="let data of designComaniesData">
+            <td>{{data.name}}</td>
+            <td>{{data.description}}</td>
+            <td>{{data.dateLastEdited | date:'short'}} </td>
+        </tr>
+    </table>
+</div>

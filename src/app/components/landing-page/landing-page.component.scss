@@ -1,0 +1,35 @@
+.container{
+    margin: 0.5rem;
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        border:1px solid #ddd;
+        thead tr th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: #fff;
+          }
+          td:first-child{
+              width: 20%;
+          }
+          td:last-child{
+              width: 20%;
+          }
+        tr:nth-child(even){background-color: #f2f2f2;}
+        tr:hover {background-color: #ddd;}
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    input[type='search']{
+        width: 75%;
+        height: 2.5rem;
+        border-radius: 3px;
+        margin:auto;
+    }
+    &__search, &__sort{
+        text-align: center;
+    }
+}
