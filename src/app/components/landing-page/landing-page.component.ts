@@ -1,7 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MockServiceService } from 'src/app/services/mock-service.service';
 import { tap, map } from 'rxjs/operators';
-import { InteriorFormat } from 'src/app/models/interior-format.interface'
+import { InteriorFormat } from 'src/app/models/interior-format.interface';
+import { TodoAction } from 'src/app/stores/todo/todo.actions';
+import { Store } from '@ngxs/store';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -17,8 +19,13 @@ export class LandingPageComponent implements OnInit {
   endIndex;
   currentPage:number=1;
   pageSize:number = 10;
-  constructor(public service: MockServiceService,public changeref:ChangeDetectorRef) { }
+  constructor(public service: MockServiceService,public changeref:ChangeDetectorRef,
+    public store: Store) { }
   ngOnInit(): void {
+    this.store.select(state=> state.Todo.Stores).subscribe(data=>{
+      console.log(data);
+    })
+    
     this.service.getData().subscribe((data)=>{
       this.totalData= data;
         this.designComaniesData= JSON.parse(JSON.stringify(data));;
@@ -38,7 +45,8 @@ export class LandingPageComponent implements OnInit {
     this.startIndex='';
     this.endIndex='';
     this.currentPage=null;
-    
+  
+  
     // if(1){
       this.designComaniesData= this.totalData.filter((data)=>{
         return this.searchText? (data.name.toLowerCase().includes(this.searchText.toLowerCase()) || data.description.toLowerCase().includes(this.searchText.toLowerCase())): data;
@@ -61,5 +69,10 @@ export class LandingPageComponent implements OnInit {
     this.endIndex=10-1;
     this.startIndex=0;
     this.changeref.markForCheck();
+    
+    const data:any={
+      searchText:this.searchText,
+    };
+    this.store.dispatch(new TodoAction(data))
   }
 }

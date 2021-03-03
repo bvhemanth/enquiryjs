@@ -9,6 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FiltersPipe } from './pipes/filters.pipe';
 import { CardComponent } from './common/card/card.component';
 import { PaginationComponent } from './common/pagination/pagination.component';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin'
+import { TodoState } from './stores/todo/todo.state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +25,12 @@ import { PaginationComponent } from './common/pagination/pagination.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
+    NgxsModule.forRoot([
+      TodoState
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
