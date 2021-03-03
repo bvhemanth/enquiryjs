@@ -1,6 +1,6 @@
-#git clone
-#go to folder do npm i
-#then ng serve
+# git clone
+# go to folder do npm i
+# then ng serve
 
 
 
