@@ -1,4 +1,4 @@
-# git clone
+# git clone https://github.com/bvhemanth/enquiryjs.git
 # go to folder do npm i
 # then ng serve
 
