@@ -13,6 +13,9 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin'
 import { TodoState } from './stores/todo/todo.state';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,9 @@ import { TodoState } from './stores/todo/todo.state';
     NgxsModule.forRoot([
       TodoState
     ]),
+    NgxsStoragePluginModule.forRoot({
+      key: TodoState
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,7 +23,7 @@ export class LandingPageComponent implements OnInit {
     public store: Store) { }
   ngOnInit(): void {
     this.store.select(state=> state.Todo.Stores).subscribe(data=>{
-      console.log(data);
+      this.searchText = data.searchText;
     })
     
     this.service.getData().subscribe((data)=>{
@@ -34,10 +34,12 @@ export class LandingPageComponent implements OnInit {
         for(let i=0;i<count;i++){
           this.pages.push(i+1);
         }
+        this.search()
       });
     this.endIndex=this.currentPage*this.pageSize-1;
     this.startIndex=this.currentPage*this.pageSize-10;
     this.changeref.markForCheck();
+   
   }
 
   search(){
@@ -69,7 +71,7 @@ export class LandingPageComponent implements OnInit {
     this.endIndex=10-1;
     this.startIndex=0;
     this.changeref.markForCheck();
-    
+
     const data:any={
       searchText:this.searchText,
     };
