@@ -1,3 +1,10 @@
+#git clone
+#go to folder do npm i
+#then ng serve
+
+
+
+
 # Inscmp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
