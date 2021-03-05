@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MockServiceService } from 'src/app/services/mock-service.service';
-import { tap, map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { InteriorFormat } from 'src/app/models/interior-format.interface';
 import { TodoAction } from 'src/app/stores/todo/todo.actions';
 import { Store } from '@ngxs/store';
@@ -19,6 +19,7 @@ export class LandingPageComponent implements OnInit {
   endIndex;
   currentPage:number=1;
   pageSize:number = 10;
+  sortField="";
   constructor(public service: MockServiceService,public changeref:ChangeDetectorRef,
     public store: Store) { }
   ngOnInit(): void {
@@ -26,20 +27,15 @@ export class LandingPageComponent implements OnInit {
       this.searchText = data.searchText;
     })
     
-    this.service.getData().subscribe((data)=>{
+    this.service.getData().pipe(take(1)).subscribe((data)=>{
       this.totalData= data;
         this.designComaniesData= JSON.parse(JSON.stringify(data));;
         this.recordsCount= this.totalData.length/10;
-        const count = Math.ceil(this.totalData.length/10);
-        for(let i=0;i<count;i++){
-          this.pages.push(i+1);
-        }
+        this.getCount();
         this.search()
       });
     this.endIndex=this.currentPage*this.pageSize-1;
     this.startIndex=this.currentPage*this.pageSize-10;
-    this.changeref.markForCheck();
-   
   }
 
   search(){
@@ -47,34 +43,40 @@ export class LandingPageComponent implements OnInit {
     this.startIndex='';
     this.endIndex='';
     this.currentPage=null;
-  
-  
-    // if(1){
       this.designComaniesData= this.totalData.filter((data)=>{
         return this.searchText? (data.name.toLowerCase().includes(this.searchText.toLowerCase()) || data.description.toLowerCase().includes(this.searchText.toLowerCase())): data;
       }).sort((a,b)=>{
-        return a.name.localeCompare(b.name);
+        if(this.sortField==='asctitle'){
+          return a.name.localeCompare(b.name);
+        } else if(this.sortField==='destitle'){
+          return b.name.localeCompare(a.name);
+        }else if(this.sortField==='date'){
+          let c = new Date(a.dateLastEdited);
+          let d = new Date(b.dateLastEdited);
+          return c.getTime() - d.getTime()
+        }
       });
-      console.log(this.searchText)
-    //}
-    // else{
-    //   this.designComaniesData=this.totalData
-    // }
+      
     if(this.designComaniesData.length>0){
-      const count = Math.ceil(this.designComaniesData.length/10);
+      this.getCount()
+    }
+    this.currentPage=0;
+    this.endIndex=this.pageSize-1;
+    this.startIndex=0;
+
+    const data:any={
+      searchText:this.searchText,
+      endIndex:this.endIndex,
+      currentPage: this.currentPage,
+      startIndex: this.startIndex
+    };
+    this.store.dispatch(new TodoAction(data))
+  }
+
+    getCount(){
+      const count = Math.ceil(this.designComaniesData.length/this.pageSize);
       for(let i=0;i<count;i++){
         this.pages.push(i+1);
       }
     }
-    console.log(this.pages)
-    this.currentPage=1;
-    this.endIndex=10-1;
-    this.startIndex=0;
-    this.changeref.markForCheck();
-
-    const data:any={
-      searchText:this.searchText,
-    };
-    this.store.dispatch(new TodoAction(data))
-  }
 }

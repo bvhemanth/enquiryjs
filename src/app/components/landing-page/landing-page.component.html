@@ -1,17 +1,23 @@
 
 <div class="container">
     <div class="container__search">
-        <input type="search" name="" (keyup)="search()" id="search" class="mb-3 rounded" [(ngModel)]="searchText" placeholder="Search">
+        <input type="search" name="" (keyup)="search()" id="search" class="mb-3 rounded" [(ngModel)]="searchText" placeholder="Search By Title">
     </div>
     <div class="container__sort">
-        <button type="button" (click)="search()">Sort by Title</button>
-        Sort By date <input type="date">
+        <select (change)="search()" [(ngModel)]="sortField"> 
+            <option selected="selected" value="">Select</option>
+            <option value="asctitle">Asc by Title</option>
+            <option value="destitle">Des by Title</option>
+            <option value="date">Sort By date</option>
+        </select>
     </div>
     <div>
         <app-pagination [currentPage]="currentPage" [startIndex]="startIndex" 
-        [endIndex]="endIndex" [pages]="pages" [items]="designComaniesData" [count]="recordsCount"> </app-pagination>
+        [endIndex]="endIndex" 
+        [pages]="pages" 
+        [items]="designComaniesData" 
+        [count]="recordsCount"> </app-pagination>
     </div>
-
     <table>
         <thead>
             <tr>

@@ -1,19 +1,17 @@
 <div class="pagination" *ngIf="pages?.length >= 1">
     <button (click)="previous($event)">{{ previousLabel }}</button>
     <span *ngFor="let page of pages">
-        <button *ngIf="page === currentPage" class="pagination__page" (click)="setCurrent($event,page-1)">
+        <button type="button" *ngIf="page === currentPage" class="pagination__page" (click)="setCurrent($event,page-1)">
             <b>{{page}}</b>
         </button>
-        <button *ngIf="page !== currentPage" class="pagination__page" (click)="setCurrent($event,page-1)">
+        <button type="button" *ngIf="page !== currentPage" class="pagination__page" (click)="setCurrent($event,page-1)">
             {{page}}
         </button>
     </span>
     <button (click)="next($event)">{{ nextLabel }}</button>
-    {{startIndex}} {{endIndex}} {{currentPage}} {{items.length}}
 </div>
 <div class="main">
     <div *ngFor="let data of items;let i=index;">
-       <!-- | async | filters:searchText; -->
         <app-card *ngIf="i >= startIndex && i <= endIndex" [eachCompanyData]=data></app-card>
     </div>
 </div>

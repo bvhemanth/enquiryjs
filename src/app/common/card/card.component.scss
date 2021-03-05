@@ -13,4 +13,8 @@ img{
     margin: 0.875rem;
     border:1px solid #ddd;
     border-radius:0.5rem;
+    transition: 1s;
+    &:hover{
+        transform: scale(1.05);
+    }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, SimpleChanges, OnChanges } from '@angular/core';
 import * as EventEmitter from 'events';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-pagination',
@@ -7,34 +8,40 @@ import * as EventEmitter from 'events';
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
   @Input() items;
   @Input() searchText;
   @Input() pageSize = 10;
   @Output() whenSerch= new EventEmitter();
-  previousLabel = 'Previous';
+  previousLabel = 'Prev';
   nextLabel = 'Next';
   @Input() count;
   @Input() currentPage;
   @Input() pages= [];
-  @Input() startIndex: number=0;
-  @Input() endIndex: number=10;
-  constructor() { }
+  @Input() startIndex;
+  @Input() endIndex;
+  constructor(public store: Store) { }
 
   ngOnInit(): void {
-  
-      console.log(this.items)
-      if(this.items)
-        this.count =  this.items.length/this.pageSize;
-        for(let i=0;i<this.count;i++){
-          this.pages.push(i+1);
-        }
-  
+    if(this.items)
+      this.count =  this.items.length/this.pageSize;
+      for(let i=0;i<this.count;i++){
+        this.pages.push(i+1);
+      }
     this.calculateIndexes();
   }
+
+   ngOnChanges(changes:SimpleChanges) {
+    if (changes){
+      this.store.select(state=> state.Todo.Stores).subscribe(stores=>{
+        this.endIndex=stores.endIndex;
+        this.currentPage=stores.currentPage;
+        this.startIndex=stores.startIndex;
+      });
+    }
+  }    
   
   calculateIndexes() {
-
     if (this.currentPage < 1) {
       this.currentPage = 1;
     }
