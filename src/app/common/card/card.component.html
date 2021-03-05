@@ -1,6 +1,7 @@
 <ng-container *ngIf="eachCompanyData.name">
     <div class="card">
         <img [src]=eachCompanyData.image [alt]=eachCompanyData.name>
+        <hr/>
         <div>{{eachCompanyData.name}}</div>
         <p class="desc" [title]="eachCompanyData.description">{{eachCompanyData.description}}</p>
     </div>

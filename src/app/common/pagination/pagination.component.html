@@ -1,5 +1,5 @@
 <div class="pagination" *ngIf="pages?.length >= 1">
-    <button (click)="previous($event)">{{ previousLabel }}</button>
+    <button id="prev" (click)="previous($event)">{{ previousLabel }}</button>
     <span *ngFor="let page of pages">
         <button type="button" *ngIf="page === currentPage" class="pagination__page" (click)="setCurrent($event,page-1)">
             <b>{{page}}</b>
@@ -8,7 +8,7 @@
             {{page}}
         </button>
     </span>
-    <button (click)="next($event)">{{ nextLabel }}</button>
+    <button id="next" (click)="next($event)">{{ nextLabel }}</button>
 </div>
 <div class="main">
     <div *ngFor="let data of items;let i=index;">
