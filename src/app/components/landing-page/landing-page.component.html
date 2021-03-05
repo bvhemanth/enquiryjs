@@ -1,15 +1,18 @@
 
 <div class="container">
-    <div class="container__search">
-        <input type="search" name="" (keyup)="search()" id="search" class="mb-3 rounded" [(ngModel)]="searchText" placeholder="Search By Title">
-    </div>
-    <div class="container__sort">
-        <select (change)="search()" [(ngModel)]="sortField"> 
-            <option selected="selected" value="">Select</option>
-            <option value="asctitle">Asc by Title</option>
-            <option value="destitle">Des by Title</option>
-            <option value="date">Sort By date</option>
-        </select>
+    <div class="container__filters">
+        <div class="container__filters__search">
+            <input type="search" name="" (keyup)="search()" id="search" class="mb-3 rounded" [(ngModel)]="searchText" placeholder="Search By Title or Description">
+        </div>
+        <div class="container__filters__sort">
+            Sort by
+            <select (change)="search()" [(ngModel)]="sortField"> 
+                <option selected="selected" value="">Select</option>
+                <option value="asctitle">Asc by Title</option>
+                <option value="destitle">Des by Title</option>
+                <option value="date">Sort By date</option>
+            </select>
+        </div>
     </div>
     <div>
         <app-pagination [currentPage]="currentPage" [startIndex]="startIndex" 

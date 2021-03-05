@@ -8,28 +8,42 @@
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #4CAF50;
+            background-color: #579ED3;
             color: #fff;
-          }
-          td:first-child{
-              width: 20%;
-          }
-          td:last-child{
-              width: 20%;
-          }
+        }
+        td:first-child{
+            width: 20%;
+        }
+        td:last-child{
+            width: 20%;
+        }
         tr:nth-child(even){background-color: #f2f2f2;}
         tr:hover {background-color: #ddd;}
     }
     table, th, td {
         border: 1px solid black;
     }
-    input[type='search']{
-        width: 75%;
-        height: 2.5rem;
-        border-radius: 3px;
-        margin:auto;
-    }
-    &__search, &__sort{
-        text-align: center;
+    &__filters{
+        display: flex;
+        align-items: stretch;
+        margin: 0.5rem;
+        div{
+            flex-grow: 1;
+        }
+        &__search{
+            text-align: left;
+            input[type='search']{
+                width: 75%;
+                height: 2.5rem;
+                border-radius: 3px;
+                margin:auto;
+            }
+        }
+        &__sort{
+            text-align: right;
+            select{
+                height: 2.5rem;
+            }
+        }
     }
 }
