@@ -26,6 +26,10 @@ export class LandingPageComponent implements OnInit {
     this.store.select(state=> state.Todo.Stores).subscribe(data=>{
       if(!!data.searchText)
       this.searchText = data.searchText;
+      
+      if(!!data.sortField){
+        this.sortField = data.sortField;
+      }
     })
     
     this.service.getData().pipe(take(1)).subscribe((data)=>{
@@ -69,7 +73,8 @@ export class LandingPageComponent implements OnInit {
       searchText:this.searchText,
       endIndex:this.endIndex,
       currentPage: this.currentPage,
-      startIndex: this.startIndex
+      startIndex: this.startIndex,
+      sortField:this.sortField
     };
     this.store.dispatch(new TodoAction(data))
   }
