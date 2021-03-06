@@ -6,7 +6,7 @@
         </div>
         <div class="container__filters__sort">
             Sort by
-            <select (change)="search()" [(ngModel)]="sortField"> 
+            <select (change)="search()" [(ngModel)]="sortField" id="sort"> 
                 <option selected="selected" value="">Select</option>
                 <option value="asctitle" id="asctitle">Asc by Title</option>
                 <option value="destitle">Des by Title</option>
@@ -21,7 +21,7 @@
         [items]="designCompaniesData" 
         [count]="recordsCount"> </app-pagination>
     </div>
-    <table>
+    <table *ngIf="designCompaniesData.length >=1">
         <thead>
             <tr>
                 <th>

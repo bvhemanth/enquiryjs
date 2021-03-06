@@ -293,6 +293,16 @@ fdescribe('LandingPageComponent', () => {
       inputElement.dispatchEvent(event);
       expect(search).toHaveBeenCalled();
     });
+
+    it('should select dropdown and call search',() => {
+      component.ngOnInit();
+      const search = spyOn(component, 'search').and.callThrough();
+      const select: HTMLSelectElement = fixture.debugElement.query(By.css('#sort')).nativeElement;
+      select.value = select.options[2].value;
+      select.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+      expect(search).toHaveBeenCalled();
+    })
 });
 
 

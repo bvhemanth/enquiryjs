@@ -23,6 +23,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   constructor(public store: Store) { }
 
   ngOnInit(): void {
+    this.pages=[];
     if(this.items)
       this.count =  this.items.length/this.pageSize;
       for(let i=0;i<this.count;i++){

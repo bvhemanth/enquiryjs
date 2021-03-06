@@ -265,6 +265,32 @@ fdescribe('PaginationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('shoud decrease to proper value when exceeds',()=>{
+    component.currentPage=11;
+    component.calculateIndexes();
+     expect(component.currentPage).toEqual(10);
+  });
+  it('next event with search function', ()=>{
+    const search = spyOn(component, 'calculateIndexes').and.callThrough();
+    const event = new Event('click');
+    component.next(event);
+    expect(search).toHaveBeenCalledTimes(1);
+  })
+
+  it('prev event with search function', ()=>{
+    const search = spyOn(component, 'calculateIndexes').and.callThrough();
+    const event = new Event('click');
+    component.previous(event);
+    expect(search).toHaveBeenCalledTimes(1);
+  });
+
+  it('should increase page number', ()=>{
+    component.currentPage=3;
+    const search = spyOn(component, 'calculateIndexes').and.callThrough();
+    const event = new Event('click');
+    component.next(event);
+    expect(component.currentPage).toEqual(4);
+  })
 });
 
 

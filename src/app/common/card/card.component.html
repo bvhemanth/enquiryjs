@@ -2,7 +2,7 @@
     <div class="card">
         <img [src]=eachCompanyData.image [alt]=eachCompanyData.name>
         <hr/>
-        <div>{{eachCompanyData.name}}</div>
+        <div>{{eachCompanyData.name}} - {{eachCompanyData.dateLastEdited | date:'short'}}</div>
         <p class="desc" [title]="eachCompanyData.description">{{eachCompanyData.description}}</p>
     </div>
 </ng-container>
