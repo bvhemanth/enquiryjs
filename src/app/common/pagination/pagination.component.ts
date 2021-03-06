@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, SimpleChanges, OnChanges } from '@angular/core';
 import * as EventEmitter from 'events';
 import { Store } from '@ngxs/store';
+import { InteriorFormat } from 'src/app/models/interior-format.interface';
 
 @Component({
   selector: 'app-pagination',
@@ -9,10 +10,9 @@ import { Store } from '@ngxs/store';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input() items;
+  @Input() items:InteriorFormat[]=[];
   @Input() searchText;
   @Input() pageSize = 10;
-  @Output() whenSerch= new EventEmitter();
   previousLabel = 'Prev';
   nextLabel = 'Next';
   @Input() count;

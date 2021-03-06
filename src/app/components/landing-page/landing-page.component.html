@@ -8,7 +8,7 @@
             Sort by
             <select (change)="search()" [(ngModel)]="sortField"> 
                 <option selected="selected" value="">Select</option>
-                <option value="asctitle">Asc by Title</option>
+                <option value="asctitle" id="asctitle">Asc by Title</option>
                 <option value="destitle">Des by Title</option>
                 <option value="date">Sort By date</option>
             </select>
@@ -18,7 +18,7 @@
         <app-pagination [currentPage]="currentPage" [startIndex]="startIndex" 
         [endIndex]="endIndex" 
         [pages]="pages" 
-        [items]="designComaniesData" 
+        [items]="designCompaniesData" 
         [count]="recordsCount"> </app-pagination>
     </div>
     <table>
@@ -35,7 +35,7 @@
                 </th>
             </tr>
         </thead>
-        <tr *ngFor="let data of designComaniesData">
+        <tr *ngFor="let data of designCompaniesData">
             <td>{{data.name}}</td>
             <td>{{data.description}}</td>
             <td>{{data.dateLastEdited | date:'short'}} </td>

@@ -10,8 +10,8 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./landing-page.component.scss'], 
 })
 export class LandingPageComponent implements OnInit {
-  designComaniesData:InteriorFormat[]=[];
-  searchText:any;
+  designCompaniesData:InteriorFormat[]=[];
+  searchText:any='';
   totalData;
   recordsCount;
   pages=[];
@@ -24,12 +24,13 @@ export class LandingPageComponent implements OnInit {
     public store: Store) { }
   ngOnInit(): void {
     this.store.select(state=> state.Todo.Stores).subscribe(data=>{
+      if(!!data.searchText)
       this.searchText = data.searchText;
     })
     
     this.service.getData().pipe(take(1)).subscribe((data)=>{
       this.totalData= data;
-        this.designComaniesData= JSON.parse(JSON.stringify(data));;
+        this.designCompaniesData= JSON.parse(JSON.stringify(data));;
         this.recordsCount= this.totalData.length/10;
         this.getCount();
         this.search()
@@ -43,7 +44,7 @@ export class LandingPageComponent implements OnInit {
     this.startIndex='';
     this.endIndex='';
     this.currentPage=null;
-      this.designComaniesData= this.totalData.filter((data)=>{
+      this.designCompaniesData= this.totalData.filter((data)=>{
         return this.searchText? (data.name.toLowerCase().includes(this.searchText.toLowerCase()) || data.description.toLowerCase().includes(this.searchText.toLowerCase())): data;
       }).sort((a,b)=>{
         if(this.sortField==='asctitle'){
@@ -57,7 +58,7 @@ export class LandingPageComponent implements OnInit {
         }
       });
       
-    if(this.designComaniesData.length>0){
+    if(this.designCompaniesData.length>0){
       this.getCount()
     }
     this.currentPage=0;
@@ -74,7 +75,7 @@ export class LandingPageComponent implements OnInit {
   }
 
     getCount(){
-      const count = Math.ceil(this.designComaniesData.length/this.pageSize);
+      const count = Math.ceil(this.designCompaniesData.length/this.pageSize);
       for(let i=0;i<count;i++){
         this.pages.push(i+1);
       }
